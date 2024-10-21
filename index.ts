@@ -21,8 +21,14 @@ if (zones && utc) {
   // west of utc is BEHIND in time, negative. east of utc is AHEAD in time, positive
   if (utcHours === FIVE_PM) {
     offsetHours = [0];
+    utc.setAttribute('title', `offset: 0`);
   } else {
-    offsetHours = [FIVE_PM - utcHours, -(24 + utcHours - FIVE_PM)];
+    // some of these offsets are never actually used...
+    // there are at least a couple of times (3am, 4am) where there could be both offsets
+    const one = FIVE_PM - utcHours;
+    const two = -(24 + utcHours - FIVE_PM);
+    offsetHours = [one, two];
+    utc.setAttribute('title', `offsets: ${one} or ${two}`);
   }
   Object.entries(tzs).forEach(([zone, details]) => {
     // floor should help include time zones that are not on the exact hour
