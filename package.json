@@ -1,4 +1,6 @@
 {
+  "name": "five_oclock",
+  "source": "index.html",
   "devDependencies": {
     "parcel": "^2.12.0"
   },
@@ -7,8 +9,8 @@
     "gh-pages": "^6.2.0"
   },
   "scripts": {
-    "start": "parcel index.html",
-    "predeploy": "rm -rf dist && parcel build index.html --public-url https://danevans.github.io/five_oclock/",
+    "start": "parcel",
+    "predeploy": "rm -rf dist && parcel build --public-url https://danevans.github.io/five_oclock/",
     "deploy": "gh-pages -d dist"
   }
 }
