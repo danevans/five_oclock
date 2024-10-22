@@ -1,5 +1,6 @@
 import { getAllTimezones, getCountriesForTimezone } from 'countries-and-timezones';
 import { randomFactory } from './random-factory';
+import { pad0 } from './pad0';
 
 const FIVE_PM = 17;
 
@@ -13,8 +14,7 @@ if (zonesList && utc) {
   const now = new Date();
   const utcHours = now.getUTCHours();
 
-  const minutes = `0${now.getUTCMinutes()}`.slice(-2);
-  utc.textContent = `${utcHours}:${minutes}`;
+  utc.textContent = `${pad0(utcHours)}:${pad0(now.getUTCMinutes())}`;
 
   let offsetHours: Array<Number> = [];
   // west of utc is BEHIND in time, negative. east of utc is AHEAD in time, positive
