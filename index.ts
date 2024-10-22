@@ -10,6 +10,13 @@ const tzs = getAllTimezones();
 const zones = document.getElementById('zones');
 const utc = document.getElementById('utc');
 
+const drinks = ['🍺', '🍻', '🥂', '🍷', '🥃', '🍸', '🍹', '🧉', '🍾', '🍶'];
+
+function randomDrink() {
+  const rand = Math.floor(Math.random() * drinks.length);
+  return drinks[rand];
+}
+
 if (zones && utc) {
   const now = new Date();
   const utcHours = now.getUTCHours();
@@ -39,7 +46,9 @@ if (zones && utc) {
       );
       countries.forEach((country) => {
         const li = document.createElement('li');
-        li.textContent = `${country}, ${zone}, ${details.dstOffset / 60}`;
+        li.textContent = `${randomDrink()} ${country}, ${zone}, ${
+          details.dstOffset / 60
+        }`;
         zones.appendChild(li);
       });
     }
