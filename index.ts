@@ -3,15 +3,13 @@ import { randomFactory } from './random-factory';
 
 const FIVE_PM = 17;
 
-const tzs = getAllTimezones();
-
-const zones = document.getElementById('zones');
+const zonesList = document.getElementById('zones');
 const utc = document.getElementById('utc');
 
 const DRINKS = ['🍺', '🍻', '🥂', '🍷', '🥃', '🍸', '🍹', '🧉', '🍾', '🍶'] as const;
 const randomDrink = randomFactory(DRINKS);
 
-if (zones && utc) {
+if (zonesList && utc) {
   const now = new Date();
   const utcHours = now.getUTCHours();
 
@@ -31,15 +29,14 @@ if (zones && utc) {
     offsetHours = [one, two];
     utc.setAttribute('title', `offsets: ${one} or ${two}`);
   }
-  Object.entries(tzs).forEach(([zone, { dstOffset }]) => {
+  Object.entries(getAllTimezones()).forEach(([zone, { dstOffset }]) => {
     // floor should help include time zones that are not on the exact hour
     const target = Math.floor(dstOffset / 60);
     if (offsetHours.includes(target)) {
-      const countries = getCountriesForTimezone(zone);
-      countries.forEach(({ name }) => {
+      getCountriesForTimezone(zone).forEach(({ name }) => {
         const li = document.createElement('li');
         li.textContent = `${randomDrink()} ${name}, ${zone}, ${dstOffset / 60}`;
-        zones.appendChild(li);
+        zonesList.appendChild(li);
       });
     }
   });
