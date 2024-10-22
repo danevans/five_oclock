@@ -31,8 +31,7 @@ if (zonesList && utc) {
   }
   Object.entries(getAllTimezones()).forEach(([zone, { dstOffset }]) => {
     // floor should help include time zones that are not on the exact hour
-    const target = Math.floor(dstOffset / 60);
-    if (offsetHours.includes(target)) {
+    if (offsetHours.includes(Math.floor(dstOffset / 60))) {
       getCountriesForTimezone(zone).forEach(({ name }) => {
         const li = document.createElement('li');
         li.textContent = `${randomDrink()} ${name}, ${zone}, ${dstOffset / 60}`;
