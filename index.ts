@@ -10,11 +10,15 @@ const tzs = getAllTimezones();
 const zones = document.getElementById('zones');
 const utc = document.getElementById('utc');
 
-const drinks = ['🍺', '🍻', '🥂', '🍷', '🥃', '🍸', '🍹', '🧉', '🍾', '🍶'];
+const DRINKS = ['🍺', '🍻', '🥂', '🍷', '🥃', '🍸', '🍹', '🧉', '🍾', '🍶'];
+let remainingDrinks = [...DRINKS];
 
 function randomDrink() {
-  const rand = Math.floor(Math.random() * drinks.length);
-  return drinks[rand];
+  if (remainingDrinks.length === 0) {
+    remainingDrinks = [...DRINKS];
+  }
+  const idx = Math.floor(Math.random() * remainingDrinks.length);
+  return remainingDrinks.splice(idx, 1)[0];
 }
 
 if (zones && utc) {
