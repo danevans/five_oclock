@@ -1,7 +1,4 @@
-import {
-  getAllTimezones,
-  getCountriesForTimezone,
-} from 'countries-and-timezones';
+import { getAllTimezones, getCountriesForTimezone } from 'countries-and-timezones';
 
 const FIVE_PM = 17;
 
@@ -10,16 +7,19 @@ const tzs = getAllTimezones();
 const zones = document.getElementById('zones');
 const utc = document.getElementById('utc');
 
-const DRINKS = ['🍺', '🍻', '🥂', '🍷', '🥃', '🍸', '🍹', '🧉', '🍾', '🍶'];
-let remainingDrinks = [...DRINKS];
-
-function randomDrink() {
-  if (remainingDrinks.length === 0) {
-    remainingDrinks = [...DRINKS];
+function randomFactory<T>(initialChoices: Readonly<Array<T>>): () => T {
+  let remainingChoices: Array<T> = [...initialChoices];
+  return function () {
+    if (remainingChoices.length === 0) {
+      remainingChoices = [...initialChoices];
   }
-  const idx = Math.floor(Math.random() * remainingDrinks.length);
-  return remainingDrinks.splice(idx, 1)[0];
+    const idx = Math.floor(Math.random() * remainingChoices.length);
+    return remainingChoices.splice(idx, 1)[0];
+  };
 }
+
+const DRINKS = ['🍺', '🍻', '🥂', '🍷', '🥃', '🍸', '🍹', '🧉', '🍾', '🍶'] as const;
+const randomDrink = randomFactory(DRINKS);
 
 if (zones && utc) {
   const now = new Date();
