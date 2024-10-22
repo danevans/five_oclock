@@ -1,4 +1,5 @@
 import { getAllTimezones, getCountriesForTimezone } from 'countries-and-timezones';
+import { randomFactory } from './random-factory';
 
 const FIVE_PM = 17;
 
@@ -6,17 +7,6 @@ const tzs = getAllTimezones();
 
 const zones = document.getElementById('zones');
 const utc = document.getElementById('utc');
-
-function randomFactory<T>(initialChoices: Readonly<Array<T>>): () => T {
-  let remainingChoices: Array<T> = [...initialChoices];
-  return function () {
-    if (remainingChoices.length === 0) {
-      remainingChoices = [...initialChoices];
-    }
-    const idx = Math.floor(Math.random() * remainingChoices.length);
-    return remainingChoices.splice(idx, 1)[0];
-  };
-}
 
 const DRINKS = ['🍺', '🍻', '🥂', '🍷', '🥃', '🍸', '🍹', '🧉', '🍾', '🍶'] as const;
 const randomDrink = randomFactory(DRINKS);
