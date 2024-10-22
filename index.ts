@@ -12,7 +12,7 @@ function randomFactory<T>(initialChoices: Readonly<Array<T>>): () => T {
   return function () {
     if (remainingChoices.length === 0) {
       remainingChoices = [...initialChoices];
-  }
+    }
     const idx = Math.floor(Math.random() * remainingChoices.length);
     return remainingChoices.splice(idx, 1)[0];
   };
@@ -45,14 +45,10 @@ if (zones && utc) {
     // floor should help include time zones that are not on the exact hour
     const target = Math.floor(details.dstOffset / 60);
     if (offsetHours.includes(target)) {
-      const countries = getCountriesForTimezone(zone).map(
-        (country) => country.name
-      );
+      const countries = getCountriesForTimezone(zone);
       countries.forEach((country) => {
         const li = document.createElement('li');
-        li.textContent = `${randomDrink()} ${country}, ${zone}, ${
-          details.dstOffset / 60
-        }`;
+        li.textContent = `${randomDrink()} ${country.name}, ${zone}, ${details.dstOffset / 60}`;
         zones.appendChild(li);
       });
     }
