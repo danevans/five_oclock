@@ -31,14 +31,14 @@ if (zones && utc) {
     offsetHours = [one, two];
     utc.setAttribute('title', `offsets: ${one} or ${two}`);
   }
-  Object.entries(tzs).forEach(([zone, details]) => {
+  Object.entries(tzs).forEach(([zone, { dstOffset }]) => {
     // floor should help include time zones that are not on the exact hour
-    const target = Math.floor(details.dstOffset / 60);
+    const target = Math.floor(dstOffset / 60);
     if (offsetHours.includes(target)) {
       const countries = getCountriesForTimezone(zone);
-      countries.forEach((country) => {
+      countries.forEach(({ name }) => {
         const li = document.createElement('li');
-        li.textContent = `${randomDrink()} ${country.name}, ${zone}, ${details.dstOffset / 60}`;
+        li.textContent = `${randomDrink()} ${name}, ${zone}, ${dstOffset / 60}`;
         zones.appendChild(li);
       });
     }
