@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "parcel",
-    "predeploy": "rm -rf dist && parcel build --public-url https://danevans.github.io/five_oclock/",
+    "predeploy": "rm -rf dist .parcel-cache && parcel build --public-url https://danevans.github.io/five_oclock/",
     "deploy": "gh-pages -d dist"
   }
 }
