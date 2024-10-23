@@ -1,4 +1,4 @@
-# Five O'Clock Somewhere 🕔
+# 🕔 Five O'Clock Somewhere
 
 A simple webpage that calculates where in the world it is currently five o'clock pm.
 
